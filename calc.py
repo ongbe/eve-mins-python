@@ -1,1 +1,1 @@
-# This file handles the calculations data provided externally.
+# This module provides functions for the calculations.

@@ -1,18 +1,19 @@
 import items
+import calc
 
 # The main executable.
 # Currently serves as the main frontend. Input is currently handled here and
 # also all of the output.
 
 # Checks for empty strings.
-def getIntInput(str):
+def get_int_input(str):
 	try:
 		return int(str)
 	except ValueError:
 		return 0
 
 # Calculates the total value of all items in a list.
-def totalValue(list):
+def total_value(list):
 	sum = 0
 
 	for elements in list:
@@ -21,13 +22,13 @@ def totalValue(list):
 	return sum
 
 # Get amounts of minerals.
-amountTritanium = getIntInput(input("How much Tritanium was refined? "))
-amountPyerite = getIntInput(input("How much Pyerite was refined? "))
-amountMexallon = getIntInput(input("How much Mexallon was refined? "))
-amountIsogen = getIntInput(input("How much Isogen was refined? "))
-amountNocxium = getIntInput(input("How much Nocxium was refined? "))
-amountZydrine = getIntInput(input("How much Zydrine was refined? "))
-amountMegacyte = getIntInput(input("How much Megacyte was refined? "))
+amountTritanium = get_int_input(input("How much Tritanium was refined? "))
+amountPyerite = get_int_input(input("How much Pyerite was refined? "))
+amountMexallon = get_int_input(input("How much Mexallon was refined? "))
+amountIsogen = get_int_input(input("How much Isogen was refined? "))
+amountNocxium = get_int_input(input("How much Nocxium was refined? "))
+amountZydrine = get_int_input(input("How much Zydrine was refined? "))
+amountMegacyte = get_int_input(input("How much Megacyte was refined? "))
 
 # Set prices for minerals.
 priceTritanium = 2.73
@@ -49,4 +50,4 @@ minerals.append(items.Mineral("zydrine", amountZydrine, priceZydrine))
 minerals.append(items.Mineral("megacyte", amountMegacyte, priceMegacyte))
 
 print()
-print("The total ISK value of the minerals would be: ",totalValue(minerals))
+print("The total ISK value of the minerals would be: ",total_value(minerals))
