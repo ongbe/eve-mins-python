@@ -12,15 +12,6 @@ def get_int_input(str):
 	except ValueError:
 		return 0
 
-# Calculates the total value of all items in a list.
-def total_value(list):
-	sum = 0
-
-	for elements in list:
-		sum += elements.amount * elements.price
-
-	return sum
-
 # Get amounts of minerals.
 amountTritanium = get_int_input(input("How much Tritanium was refined? "))
 amountPyerite = get_int_input(input("How much Pyerite was refined? "))
@@ -50,4 +41,5 @@ minerals.append(items.Mineral("zydrine", amountZydrine, priceZydrine))
 minerals.append(items.Mineral("megacyte", amountMegacyte, priceMegacyte))
 
 print()
-print("The total ISK value of the minerals would be: ",total_value(minerals))
+print("The total ISK value of the minerals would be: ", 
+		calc.total_value(minerals))
