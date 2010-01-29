@@ -12,6 +12,33 @@ def get_int_input(str):
 	except ValueError:
 		return 0
 
+def check_choice(str):
+	if str in ['y', 'Y', 'n', 'N']:
+		return True
+	else:
+		return False
+
+def check_loop(str):
+	while True:
+		if check_choice(str):
+			return str
+		else:
+			str = input("Your input was faulty. Load predefined? (Y/N) ")
+
+
+# -----------------------
+# User input starts here.
+# -----------------------
+
+# User is given choice to either load predefined mineral prices or input
+# them manually.
+priceChoice = input("Do you wish to load predifined mineral prices? (Y/N) ")
+if check_loop(priceChoice) in ['y', 'Y']:
+	print("Not implemented!")
+else:
+	print("Manual input selected.")
+	
+
 # Get amounts of minerals.
 amountTritanium = get_int_input(input("How much Tritanium was refined? "))
 amountPyerite = get_int_input(input("How much Pyerite was refined? "))
