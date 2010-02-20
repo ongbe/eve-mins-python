@@ -1,29 +1,36 @@
+import locale
 import items
 import calc
 
+# Set appropriate locale.
+locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
+
 # The main executable.
-# Currently serves as the main frontend. Input is currently handled here and
-# also all of the output.
+# Currently serves as the main frontend. Input is handled here and also all of
+# the output.
 
 # Checks for empty strings.
 def get_int_input(str):
-	try:
-		return int(str)
-	except ValueError:
-		return 0
+    try:
+        return int(str)
+    except ValueError:
+        return 0
 
 def check_choice(str):
-	if str in ['y', 'Y', 'n', 'N']:
-		return True
-	else:
-		return False
+    if str in ['y', 'Y', 'n', 'N']:
+        return True
+    else:
+        return False
 
 def check_loop(str):
-	while True:
-		if check_choice(str):
-			return str
-		else:
-			str = input("Your input was faulty. Load predefined? (Y/N) ")
+    while True:
+        if check_choice(str):
+            return str
+        else:
+            str = input("Your input was faulty. Load predefined? (Y/N) ")
+
+def get_prices():
+    pass
 
 
 # -----------------------
@@ -34,10 +41,10 @@ def check_loop(str):
 # them manually.
 priceChoice = input("Do you wish to load predifined mineral prices? (Y/N) ")
 if check_loop(priceChoice) in ['y', 'Y']:
-	print("Not implemented!")
+    print("Not implemented!")
 else:
-	print("Manual input selected.")
-	
+    print("Manual input selected.")
+    
 
 # Get amounts of minerals.
 amountTritanium = get_int_input(input("How much Tritanium was refined? "))
@@ -69,4 +76,4 @@ minerals.append(items.Mineral("megacyte", amountMegacyte, priceMegacyte))
 
 print()
 print("The total ISK value of the minerals would be: ", 
-		calc.total_value(minerals))
+      locale.currency((calc.total_value(minerals)), False, True, False), " ISK")
