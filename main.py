@@ -32,6 +32,9 @@ def check_loop(str):
 def get_prices():
     pass
 
+# Prices are loaded here.
+#raw_prices = open(prices.list)
+#for line in raw_prices:
 
 # -----------------------
 # User input starts here.
