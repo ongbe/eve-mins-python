@@ -32,9 +32,16 @@ def check_loop(str):
 def get_prices():
     pass
 
-# Prices are loaded here.
-#raw_prices = open(prices.list)
-#for line in raw_prices:
+def load_prices():
+	mineralPrices = {}
+	rawPrices = open('prices.list')
+
+	line = rawPrices.readline()
+	while line != "":
+		splitLine = line.split("=")
+		mineralPrices[splitLine[0].lower()] = splitLine[1].strip()
+		line = rawPrices.readline()
+
 
 # -----------------------
 # User input starts here.
@@ -44,10 +51,11 @@ def get_prices():
 # them manually.
 priceChoice = input("Do you wish to load predifined mineral prices? (Y/N) ")
 if check_loop(priceChoice) in ['y', 'Y']:
-    print("Not implemented!")
+	load_prices()
+	# TODO: Set the prices.
 else:
     print("Manual input selected.")
-    
+
 
 # Get amounts of minerals.
 amountTritanium = get_int_input(input("How much Tritanium was refined? "))
@@ -76,6 +84,7 @@ minerals.append(items.Mineral("isogen", amountIsogen, priceIsogen))
 minerals.append(items.Mineral("nocxium", amountNocxium, priceNocxium))
 minerals.append(items.Mineral("zydrine", amountZydrine, priceZydrine))
 minerals.append(items.Mineral("megacyte", amountMegacyte, priceMegacyte))
+minerals.
 
 print()
 print("The total ISK value of the minerals would be: ", 
