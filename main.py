@@ -16,6 +16,12 @@ def get_int_input(str):
     except ValueError:
         return 0
 
+def get_float_input(str):
+    try:
+        return float(str)
+    except ValueError:
+        return 0
+
 def check_choice(str):
     if str in ['y', 'Y', 'n', 'N']:
         return True
@@ -29,19 +35,30 @@ def check_loop(str):
         else:
             str = input("Your input was faulty. Load predefined? (Y/N) ")
 
-def get_prices():
-    pass
-
 def load_prices():
-	mineralPrices = {}
-	rawPrices = open('prices.list')
+    mineralPrices = {}
+    rawPrices = open('prices.list')
 
-	line = rawPrices.readline()
-	while line != "":
-		splitLine = line.split("=")
-		mineralPrices[splitLine[0].lower()] = splitLine[1].strip()
-		line = rawPrices.readline()
+    line = rawPrices.readline()
+    while line != "":
+        splitLine = line.split("=")
+        mineralPrices[splitLine[0].lower()] = splitLine[1].strip()
+        line = rawPrices.readline()
+    return mineralPrices
 
+def manual_prices():
+    mineralPrices = {}
+
+    print("Please enter the price of each mineral.")
+    mineralPrices['tritanium'] = get_float_input(input("Tritanium: "))
+    mineralPrices['pyerite'] = get_float_input(input("Pyerite: "))
+    mineralPrices['mexallon'] = get_float_input(input("Mexallon: "))
+    mineralPrices['isogen'] = get_float_input(input("Isogen: "))
+    mineralPrices['nocxium'] = get_float_input(input("Nocxium: "))
+    mineralPrices['zydrine'] = get_float_input(input("Zydrine: "))
+    mineralPrices['megacyte'] = get_float_input(input("Megacyte: "))
+    
+    return mineralPrices
 
 # -----------------------
 # User input starts here.
@@ -51,11 +68,10 @@ def load_prices():
 # them manually.
 priceChoice = input("Do you wish to load predifined mineral prices? (Y/N) ")
 if check_loop(priceChoice) in ['y', 'Y']:
-	load_prices()
-	# TODO: Set the prices.
+    mineralPrices = load_prices()
 else:
-    print("Manual input selected.")
-
+    print("\nManual input selected.\n")
+    mineralPrices = manual_prices()
 
 # Get amounts of minerals.
 amountTritanium = get_int_input(input("How much Tritanium was refined? "))
@@ -66,26 +82,23 @@ amountNocxium = get_int_input(input("How much Nocxium was refined? "))
 amountZydrine = get_int_input(input("How much Zydrine was refined? "))
 amountMegacyte = get_int_input(input("How much Megacyte was refined? "))
 
-# Set prices for minerals.
-priceTritanium = 2.73
-pricePyerite = 4.99
-priceMexallon = 25.40
-priceIsogen = 51.80
-priceNocxium = 76.26
-priceZydrine = 1596.88
-priceMegacyte = 3009.63
-
-# Creates a list and appends the minerals onto it.
+# Creates a list and appends the minerals (name, amount, price) onto it.
 minerals = []
-minerals.append(items.Mineral("tritanium", amountTritanium, priceTritanium))
-minerals.append(items.Mineral("pyerite", amountPyerite, pricePyerite))
-minerals.append(items.Mineral("mexallon", amountMexallon, priceMexallon))
-minerals.append(items.Mineral("isogen", amountIsogen, priceIsogen))
-minerals.append(items.Mineral("nocxium", amountNocxium, priceNocxium))
-minerals.append(items.Mineral("zydrine", amountZydrine, priceZydrine))
-minerals.append(items.Mineral("megacyte", amountMegacyte, priceMegacyte))
-minerals.
+minerals.append(items.Mineral("tritanium", amountTritanium,
+                float(mineralPrices['tritanium'])))
+minerals.append(items.Mineral("pyerite", amountPyerite,
+                float(mineralPrices['pyerite'])))
+minerals.append(items.Mineral("mexallon", amountMexallon,
+                float(mineralPrices['mexallon'])))
+minerals.append(items.Mineral("isogen", amountIsogen,
+                float(mineralPrices['isogen'])))
+minerals.append(items.Mineral("nocxium", amountNocxium,
+                float(mineralPrices['nocxium'])))
+minerals.append(items.Mineral("zydrine", amountZydrine,
+                float(mineralPrices['zydrine'])))
+minerals.append(items.Mineral("megacyte", amountMegacyte,
+                float(mineralPrices['megacyte'])))
 
 print()
-print("The total ISK value of the minerals would be: ", 
+print("The total ISK value of the minerals would be: ",
       locale.currency((calc.total_value(minerals)), False, True, False), " ISK")
