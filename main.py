@@ -60,9 +60,29 @@ def manual_prices():
     
     return mineralPrices
 
-# -----------------------
-# User input starts here.
-# -----------------------
+def manual_amounts():
+    mineralAmounts = {}
+    mineralAmounts['tritanium'] = get_int_input(input(
+        "How much Tritanium was refined? "))
+    mineralAmounts['pyerite'] = get_int_input(input(
+        "How much Pyerite was refined? "))
+    mineralAmounts['mexallon'] = get_int_input(input(
+        "How much Mexallon was refined? "))
+    mineralAmounts['isogen'] = get_int_input(input(
+        "How much Isogen was refined? "))
+    mineralAmounts['nocxium'] = get_int_input(input(
+        "How much Nocxium was refined? "))
+    mineralAmounts['zydrine'] = get_int_input(input(
+        "How much Zydrine was refined? "))
+    mineralAmounts['megacyte'] = get_int_input(input(
+        "How much Megacyte was refined? "))
+
+    return mineralAmounts
+
+
+# -----------------------------
+# User interaction starts here.
+# -----------------------------
 
 # User is given choice to either load predefined mineral prices or input
 # them manually.
@@ -74,29 +94,23 @@ else:
     mineralPrices = manual_prices()
 
 # Get amounts of minerals.
-amountTritanium = get_int_input(input("How much Tritanium was refined? "))
-amountPyerite = get_int_input(input("How much Pyerite was refined? "))
-amountMexallon = get_int_input(input("How much Mexallon was refined? "))
-amountIsogen = get_int_input(input("How much Isogen was refined? "))
-amountNocxium = get_int_input(input("How much Nocxium was refined? "))
-amountZydrine = get_int_input(input("How much Zydrine was refined? "))
-amountMegacyte = get_int_input(input("How much Megacyte was refined? "))
+mineralAmounts = manual_amounts()
 
 # Creates a list and appends the minerals (name, amount, price) onto it.
 minerals = []
-minerals.append(items.Mineral("tritanium", amountTritanium,
+minerals.append(items.Mineral("tritanium", int(mineralAmounts['tritanium']),
                 float(mineralPrices['tritanium'])))
-minerals.append(items.Mineral("pyerite", amountPyerite,
+minerals.append(items.Mineral("pyerite", int(mineralAmounts['pyerite']),
                 float(mineralPrices['pyerite'])))
-minerals.append(items.Mineral("mexallon", amountMexallon,
+minerals.append(items.Mineral("mexallon", int(mineralAmounts['mexallon']),
                 float(mineralPrices['mexallon'])))
-minerals.append(items.Mineral("isogen", amountIsogen,
+minerals.append(items.Mineral("isogen", int(mineralAmounts['isogen']),
                 float(mineralPrices['isogen'])))
-minerals.append(items.Mineral("nocxium", amountNocxium,
+minerals.append(items.Mineral("nocxium", int(mineralAmounts['nocxium']),
                 float(mineralPrices['nocxium'])))
-minerals.append(items.Mineral("zydrine", amountZydrine,
+minerals.append(items.Mineral("zydrine", int(mineralAmounts['zydrine']),
                 float(mineralPrices['zydrine'])))
-minerals.append(items.Mineral("megacyte", amountMegacyte,
+minerals.append(items.Mineral("megacyte", int(mineralAmounts['megacyte']),
                 float(mineralPrices['megacyte'])))
 
 print()
