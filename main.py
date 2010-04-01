@@ -1,13 +1,36 @@
+# The main executable.
+# Currently serves as the main frontend. Input is handled here and also all of
+# the output.
+# TODO: Make a menu where one can choose all options from a numbered list.
+
 import locale
 import items
 import calc
 
-# Set appropriate locale.
 locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 
-# The main executable.
-# Currently serves as the main frontend. Input is handled here and also all of
-# the output.
+#
+#   Methods
+#
+def price_input_method_choice():
+	choice = input("Do you wish to load predifined mineral prices? (Y/N) ")
+	if check_input_loop(choice) in ['y', 'Y']:
+		print("\nPrices loaded.\n")
+		mineralPrices = load_prices()
+		return mineralPrices
+	else:
+		print("\nManual input selected.\n")
+		mineralPrices = manual_prices()
+		return mineralPrices
+
+def ore_or_minerals_choice():
+	choice = input("Do you wish to use ores as a basis for calculations? (Y/N) ")
+	if check_input_loop(choice) in ['y', 'Y']:
+		print("\nOres selected.\n")
+		# TODO: add actual functionality.
+	else:
+		print("\nUsing minerals.\n")
+		# TODO: add actual functionality.
 
 # Checks for empty strings.
 def get_int_input(str):
@@ -16,24 +39,25 @@ def get_int_input(str):
 	except ValueError:
 		return 0
 
+# Checks for empty strings.
 def get_float_input(str):
 	try:
 		return float(str)
 	except ValueError:
 		return 0
 
-def check_choice(str):
+def check_boolchoice_input(str):
 	if str in ['y', 'Y', 'n', 'N']:
 		return True
 	else:
 		return False
 
-def check_loop(str):
+def check_input_loop(str):
 	while True:
-		if check_choice(str):
+		if check_boolchoice_input(str):
 			return str
 		else:
-			str = input("Your input was faulty. Load predefined? (Y/N) ")
+			str = input("Your input was faulty. Try again. (Y/N) ")
 
 def load_prices():
 	mineralPrices = {}
@@ -79,23 +103,14 @@ def manual_amounts():
 
 	return mineralAmounts
 
-# User is given choice to either load predefined mineral prices or input them
-# manually.
-def price_input_method_choice():
-	priceChoice = input("Do you wish to load predifined mineral prices? (Y/N) ")
-	if check_loop(priceChoice) in ['y', 'Y']:
-		print("\nPrices loaded.\n")
-		mineralPrices = load_prices()
-	else:
-		print("\nManual input selected.\n")
-		mineralPrices = manual_prices()
 
+#
+#   User interaction.
+#
 
-# -----------------------------
-# User interaction starts here.
-# -----------------------------
+ore_or_minerals_choice()
 
-price_input_method_choice()
+mineralPrices = price_input_method_choice()
 
 # TODO: Give option to load predefined amounts from file.
 mineralAmounts = manual_amounts()
