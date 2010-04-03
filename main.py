@@ -36,25 +36,25 @@ def prices_load_predefined_choice():
 		return mineralPrices
 
 # Checks for empty strings.
-def get_int_input(str):
+def get_int_input(value):
 	try:
-		return int(str)
+		return int(value)
 	except ValueError:
 		return 0
 
 # Checks for empty strings.
-def get_float_input(str):
+def get_float_input(value):
 	try:
-		return float(str)
+		return float(value)
 	except ValueError:
 		return 0
 
-def check_boolchoice_input(str):
+def check_boolchoice_input(choice):
 	while True:
-		if str in ['y', 'Y', 'n', 'N']:
-			return str
+		if choice in ['y', 'Y', 'n', 'N']:
+			return choice
 		else:
-			str = raw_input("Your input was faulty. Try again. (Y/N) ")
+			choice = raw_input("Your input was faulty. Try again. (Y/N) ")
 
 def load_prices():
 	mineralPrices = {}
