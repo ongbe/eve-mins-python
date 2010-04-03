@@ -17,7 +17,7 @@ locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 def use_ores_bool():
 	choice = raw_input(
 		"Do you wish to use ores as a basis for calculations? (Y/N) ")
-	if check_input_loop(choice) in ['y', 'Y']:
+	if check_boolchoice_input(choice) in ['y', 'Y']:
 		print("\nOres selected.\n")
 		return True
 	else:
@@ -26,7 +26,7 @@ def use_ores_bool():
 
 def prices_load_predefined_choice():
 	choice = raw_input("Do you wish to load predifined mineral prices? (Y/N) ")
-	if check_input_loop(choice) in ['y', 'Y']:
+	if check_boolchoice_input(choice) in ['y', 'Y']:
 		print("\nPrices loaded.\n")
 		mineralPrices = load_prices()
 		return mineralPrices
@@ -50,14 +50,8 @@ def get_float_input(str):
 		return 0
 
 def check_boolchoice_input(str):
-	if str in ['y', 'Y', 'n', 'N']:
-		return True
-	else:
-		return False
-
-def check_input_loop(str):
 	while True:
-		if check_boolchoice_input(str):
+		if str in ['y', 'Y', 'n', 'N']:
 			return str
 		else:
 			str = raw_input("Your input was faulty. Try again. (Y/N) ")
