@@ -12,7 +12,18 @@ locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 #
 #   Methods
 #
-def price_input_method_choice():
+
+def use_ores_bool():
+	choice = input(
+		"Do you wish to use ores as a basis for calculations? (Y/N) ")
+	if check_input_loop(choice) in ['y', 'Y']:
+		print("\nOres selected.\n")
+		return True
+	else:
+		print("\nUsing minerals.\n")
+		return False
+
+def prices_load_predefined_choice():
 	choice = input("Do you wish to load predifined mineral prices? (Y/N) ")
 	if check_input_loop(choice) in ['y', 'Y']:
 		print("\nPrices loaded.\n")
@@ -20,17 +31,8 @@ def price_input_method_choice():
 		return mineralPrices
 	else:
 		print("\nManual input selected.\n")
-		mineralPrices = manual_prices()
+		mineralPrices = manual_input_prices()
 		return mineralPrices
-
-def ore_or_minerals_choice():
-	choice = input("Do you wish to use ores as a basis for calculations? (Y/N) ")
-	if check_input_loop(choice) in ['y', 'Y']:
-		print("\nOres selected.\n")
-		# TODO: add actual functionality.
-	else:
-		print("\nUsing minerals.\n")
-		# TODO: add actual functionality.
 
 # Checks for empty strings.
 def get_int_input(str):
@@ -70,7 +72,26 @@ def load_prices():
 		line = rawPrices.readline()
 	return mineralPrices
 
-def manual_prices():
+def manual_input_ore():
+	oreAmounts = {}
+	oreAmounts['tritanium'] = get_int_input(input(
+		"How much Tritanium was refined? "))
+	oreAmounts['pyerite'] = get_int_input(input(
+		"How much Pyerite was refined? "))
+	oreAmounts['mexallon'] = get_int_input(input(
+		"How much Mexallon was refined? "))
+	oreAmounts['isogen'] = get_int_input(input(
+		"How much Isogen was refined? "))
+	oreAmounts['nocxium'] = get_int_input(input(
+		"How much Nocxium was refined? "))
+	oreAmounts['zydrine'] = get_int_input(input(
+		"How much Zydrine was refined? "))
+	oreAmounts['megacyte'] = get_int_input(input(
+		"How much Megacyte was refined? "))
+
+	return oreAmounts
+
+def manual_input_prices():
 	mineralPrices = {}
 
 	print("Please enter the price of each mineral.")
@@ -84,7 +105,7 @@ def manual_prices():
 	
 	return mineralPrices
 
-def manual_amounts():
+def manual_input_amounts():
 	mineralAmounts = {}
 	mineralAmounts['tritanium'] = get_int_input(input(
 		"How much Tritanium was refined? "))
@@ -103,35 +124,45 @@ def manual_amounts():
 
 	return mineralAmounts
 
+#
+#   Main method.
+#
+def main():
+	minerals = []
+	mineralPrices = {}
+	mineralAmounts = {}
+
+	if (use_ores_bool()):
+		print("Not implemented!")
+		# TODO: call an ore input function.
+	else:
+		mineralPrices = prices_load_predefined_choice()
+
+		# TODO: Give option to load predefined amounts from file.
+		mineralAmounts = manual_input_amounts()
+
+	# Creates a list and appends the minerals (name, amount, price) onto it.
+	minerals.append(items.Mineral("tritanium", int(mineralAmounts['tritanium']),
+		float(mineralPrices['tritanium'])))
+	minerals.append(items.Mineral("pyerite", int(mineralAmounts['pyerite']),
+		float(mineralPrices['pyerite'])))
+	minerals.append(items.Mineral("mexallon", int(mineralAmounts['mexallon']),
+		float(mineralPrices['mexallon'])))
+	minerals.append(items.Mineral("isogen", int(mineralAmounts['isogen']),
+		float(mineralPrices['isogen'])))
+	minerals.append(items.Mineral("nocxium", int(mineralAmounts['nocxium']),
+		float(mineralPrices['nocxium'])))
+	minerals.append(items.Mineral("zydrine", int(mineralAmounts['zydrine']),
+		float(mineralPrices['zydrine'])))
+	minerals.append(items.Mineral("megacyte", int(mineralAmounts['megacyte']),
+		float(mineralPrices['megacyte'])))
+
+	print()
+	print("The total ISK value of the minerals would be: ",
+		locale.currency((calc.total_value(minerals)),
+		False, True, False), " ISK")
 
 #
-#   User interaction.
+#   Execute main()
 #
-
-ore_or_minerals_choice()
-
-mineralPrices = price_input_method_choice()
-
-# TODO: Give option to load predefined amounts from file.
-mineralAmounts = manual_amounts()
-
-# Creates a list and appends the minerals (name, amount, price) onto it.
-minerals = []
-minerals.append(items.Mineral("tritanium", int(mineralAmounts['tritanium']),
-                float(mineralPrices['tritanium'])))
-minerals.append(items.Mineral("pyerite", int(mineralAmounts['pyerite']),
-                float(mineralPrices['pyerite'])))
-minerals.append(items.Mineral("mexallon", int(mineralAmounts['mexallon']),
-                float(mineralPrices['mexallon'])))
-minerals.append(items.Mineral("isogen", int(mineralAmounts['isogen']),
-                float(mineralPrices['isogen'])))
-minerals.append(items.Mineral("nocxium", int(mineralAmounts['nocxium']),
-                float(mineralPrices['nocxium'])))
-minerals.append(items.Mineral("zydrine", int(mineralAmounts['zydrine']),
-                float(mineralPrices['zydrine'])))
-minerals.append(items.Mineral("megacyte", int(mineralAmounts['megacyte']),
-                float(mineralPrices['megacyte'])))
-
-print()
-print("The total ISK value of the minerals would be: ",
-      locale.currency((calc.total_value(minerals)), False, True, False), " ISK")
+if __name__ == '__main__': main()
