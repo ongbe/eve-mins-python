@@ -14,11 +14,24 @@ locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 # Constants
 #
 
-ORES = ['veldspar', 'scordite', 'plagioclase', 'pyroxeres', 'omber', 'kernite',
-		'jaspet', 'hemorphite', 'hedbergite', 'gneiss', 'dark ochre',
-		'spodumain', 'crokite', 'bistot', 'arkonor', 'mercoxit']
-MINERALS = ['tritanium', 'pyerite', 'mexallon', 'isogen', 'nocxium', 'zydrine',
-			'megacyte', 'morphite']
+ORENAMES = ['veldspar', 'veldspar, concentrated', 'veldspar, dense', 'scordite',
+            'scordite, condensed', 'scordite, massive', 'plagioclase',
+            'plagioclase, azure', 'plagioclase, rich', 'pyroxeres',
+            'pyroxeres, solid', 'pyroxeres, viscous', 'omber', 'omber, silvery',
+            'omber, golden', 'kernite', 'kernite, luminous', 'kernite, fiery',
+            'jaspet', 'jaspet, pure', 'jaspet, pristine', 'hemorphite',
+            'hemorphite, vivid', 'hemorphite, radiant', 'hedbergite',
+            'hedbergite, vitric', 'hedbergite, glazed', 'gneiss',
+            'gneiss, iridescent', 'gneiss, prismatic', 'ochre, dark ',
+            'ochre, onyx ', 'ochre, obsidian ', 'spodumain',
+            'spodumain, bright', 'spodumain, gleaming', 'crokite',
+            'crokite, sharp', 'crokite, crystalline', 'bistot',
+            'bistot, triclinic', 'bistot, monoclinic', 'arkonor',
+            'arkonor, crimson', 'arkonor, prime', 'mercoxit', 'mercoxit, magma',
+            'mercoxit, vitreous']
+
+MINERALNAMES = ['tritanium', 'pyerite', 'mexallon', 'isogen', 'nocxium',
+                'zydrine', 'megacyte', 'morphite']
 
 #
 #   Methods
@@ -62,7 +75,7 @@ def choice_mineral_prices_load_predefined():
 		return mineralPrices
 	else:
 		print("\nManual input selected.\n")
-		mineralPrices = manual_input("{0}: ", MINERALS, prompt_int_input)
+		mineralPrices = manual_input("{0}: ", MINERALNAMES, prompt_int_input)
 		return mineralPrices
 
 def manual_input(question, iterationList, inputFunc):
@@ -93,16 +106,19 @@ def main():
 
 	if (prompt_bool("Do you wish to use ores as a basis for calculations?")):
 		raise NotImplementedError('Using ores is not implemented yet.')
-		# TODO: Call an ore input function.
+		# TODO: Prompt user for refining yield.
+		# TODO: Let user input ore amounts manually.
+		# TODO: Convert ores to minerals.
+		# TODO: Return mineralAmounts.
 	else:
 		mineralPrices = choice_mineral_prices_load_predefined()
 
 		# TODO: Give option to load predefined amounts from file.
-		mineralAmounts = manual_input("How much {0} was refined? ", MINERALS,
-			prompt_float_input)
+		mineralAmounts = manual_input("How much {0} was refined? ",
+			MINERALNAMES, prompt_float_input)
 
 	# Creates a list and appends the minerals (name, amount, price) onto it.
-	for currentMineral in MINERALS:
+	for currentMineral in MINERALNAMES:
 		minedMinerals.append(items.Mineral(currentMineral,
 			int(mineralAmounts[currentMineral]),
 			float(mineralPrices[currentMineral])))
