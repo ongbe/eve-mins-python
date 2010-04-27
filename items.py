@@ -1,9 +1,11 @@
-# Module containing specifications for:
-# 	Minerals
-# Planned:
-# 	Ships
+# TODO: Make the amounts a separate list.
 
-# Template for a mineral.
+# Module containing specifications for:
+#	Minerals
+#	Ores
+# Planned:
+#	Ships
+
 class Mineral:
 	def __init__(self, name, amount, price):
 		self.name = name
@@ -11,7 +13,9 @@ class Mineral:
 		self.price = price
 
 class Ore:
-	def __init__(self, name, amount, minerals):
+	def __init__(self, name, amount, minBatch, refinedMinerals):
 		self.name = name
 		self.amount = amount
-		self.minerals = minerals
+
+		self.refinedMinerals = refinedMinerals
+

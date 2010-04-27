@@ -7,6 +7,7 @@ from __future__ import print_function
 import locale
 import items
 import calc
+import csv
 
 locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 
@@ -22,8 +23,8 @@ ORENAMES = ['veldspar', 'veldspar, concentrated', 'veldspar, dense', 'scordite',
             'jaspet', 'jaspet, pure', 'jaspet, pristine', 'hemorphite',
             'hemorphite, vivid', 'hemorphite, radiant', 'hedbergite',
             'hedbergite, vitric', 'hedbergite, glazed', 'gneiss',
-            'gneiss, iridescent', 'gneiss, prismatic', 'ochre, dark ',
-            'ochre, onyx ', 'ochre, obsidian ', 'spodumain',
+            'gneiss, iridescent', 'gneiss, prismatic', 'ochre, dark',
+            'ochre, onyx', 'ochre, obsidian ', 'spodumain',
             'spodumain, bright', 'spodumain, gleaming', 'crokite',
             'crokite, sharp', 'crokite, crystalline', 'bistot',
             'bistot, triclinic', 'bistot, monoclinic', 'arkonor',
@@ -86,7 +87,7 @@ def manual_input(question, iterationList, inputFunc):
 
 def load_prices():
 	mineralPrices = {}
-	rawPrices = open('prices.list')
+	rawPrices = open('prices.data')
 
 	line = rawPrices.readline()
 	while line != "":
@@ -94,6 +95,13 @@ def load_prices():
 		mineralPrices[splitLine[0].lower()] = splitLine[1].strip()
 		line = rawPrices.readline()
 	return mineralPrices
+
+def load_ores():
+	ores = {}
+	rawOres = csv.reader(open('ores.data'), quotechar='"')
+	for row in rawOres:
+		# TODO: Add Ore objects to the ores dict.
+		pass
 
 #
 #   Main method.
