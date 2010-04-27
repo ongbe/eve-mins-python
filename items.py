@@ -16,6 +16,6 @@ class Ore:
 	def __init__(self, name, amount, minBatch, refinedMinerals):
 		self.name = name
 		self.amount = amount
-
+		self.minBatch = minBatch
 		self.refinedMinerals = refinedMinerals
 
