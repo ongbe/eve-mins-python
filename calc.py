@@ -7,8 +7,8 @@ def ores_to_minerals():
 	pass
 
 # Calculates the total ISK value of all items in a list.
-def total_value(list):
+def total_value(list, amounts):
 	sum = 0
-	for elements in list:
-		sum += elements.amount * elements.price
+	for element in list:
+		sum += amounts[element.name] * element.price
 	return sum

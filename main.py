@@ -128,12 +128,11 @@ def main():
 	# Creates a list and appends the minerals (name, amount, price) onto it.
 	for currentMineral in MINERALNAMES:
 		minedMinerals.append(items.Mineral(currentMineral,
-			int(mineralAmounts[currentMineral]),
 			float(mineralPrices[currentMineral])))
 
 	print()
 	print("The total ISK value of the minerals would be: ",
-		locale.currency((calc.total_value(minedMinerals)),
+		locale.currency((calc.total_value(minedMinerals, mineralAmounts)),
 		False, True, False), " ISK")
 
 
