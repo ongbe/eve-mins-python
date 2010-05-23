@@ -3,6 +3,7 @@
 # the output.
 # TODO: Make a menu where one can choose all options from a numbered list.
 
+from __future__ import division
 from __future__ import print_function
 import locale
 import items
@@ -97,30 +98,37 @@ def load_prices():
 	return mineralPrices
 
 def load_ores():
-	ores = {}
+	ores = []
 	rawOres = csv.reader(open('ores.data'), quotechar='"')
+
 	for row in rawOres:
-		# TODO: Add Ore objects to the ores dict.
-		pass
+		refinedMinerals = {}
+		colCount = 2
+		for mineral in MINERALNAMES:
+			refinedMinerals[mineral] = row[colCount]
+			colCount += 1
+
+		ores.append(items.Ore(row[0], row[1], refinedMinerals))
+	return ores
 
 #
 #   Main method.
 #
-
 def main():
 	minedMinerals = []
 	mineralPrices = {}
 	mineralAmounts = {}
+	oreAmounts = {}
+
+	mineralPrices = choice_mineral_prices_load_predefined()
 
 	if (prompt_bool("Do you wish to use ores as a basis for calculations?")):
-		raise NotImplementedError('Using ores is not implemented yet.')
-		# TODO: Prompt user for refining yield.
-		# TODO: Let user input ore amounts manually.
-		# TODO: Convert ores to minerals.
-		# TODO: Return mineralAmounts.
+		oreData = load_ores()
+		oreAmounts = manual_input("How much {0} was mined? ",
+			ORENAMES, prompt_int_input)
+		mineralAmounts = calc.ores_to_minerals(oreAmounts, oreData,
+			MINERALNAMES)
 	else:
-		mineralPrices = choice_mineral_prices_load_predefined()
-
 		# TODO: Give option to load predefined amounts from file.
 		mineralAmounts = manual_input("How much {0} was refined? ",
 			MINERALNAMES, prompt_float_input)
@@ -128,11 +136,12 @@ def main():
 	# Creates a list and appends the minerals (name, amount, price) onto it.
 	for currentMineral in MINERALNAMES:
 		minedMinerals.append(items.Mineral(currentMineral,
+			int(mineralAmounts[currentMineral]),
 			float(mineralPrices[currentMineral])))
 
 	print()
 	print("The total ISK value of the minerals would be: ",
-		locale.currency((calc.total_value(minedMinerals, mineralAmounts)),
+		locale.currency((calc.total_value(minedMinerals)),
 		False, True, False), " ISK")
 
 

@@ -16,4 +16,3 @@ class Ore:
 		self.name = name
 		self.minBatch = minBatch
 		self.refinedMinerals = refinedMinerals
-

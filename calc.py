@@ -2,9 +2,20 @@
 
 # Convert a given amount of ores to minerals.
 # Returns a dictionary with Mineral objects.
-def ores_to_minerals():
-	# TODO: Add conversion code.
-	pass
+def round_to_minimum_batch(amount, minBatch):
+	refineAmount = amount // minBatch * minBatch
+	return refineAmount
+
+def ores_to_minerals(oreAmounts, oreData, mineralList):
+	outputMinerals = {}
+	for mineral in mineralList:
+		outputMinerals[mineral] = 0
+
+	for ore in oreData:
+		for mineral in mineralList:
+			outputMinerals[mineral] += (oreAmounts[ore.name] *
+				int(ore.refinedMinerals[mineral]))
+	return outputMinerals
 
 # Calculates the total ISK value of all items in a list.
 def total_value(list, amounts):
