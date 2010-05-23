@@ -12,13 +12,10 @@ minerals worth if I sell it to the corporation (fixed prices)?"
 My intention is to have this application answer these questions.
 
 
-                              For developers
-                              --------------
-Currently the master-branch is capable of reading a list of predefined mineral
-prices and convert a user input amount of minerals to ISK.
-
-The ores-branch does not yet handle ore input.
-The data describing the mineral correspondance of each ore is loaded from an
-external file. The current issue is that I plan on moving the concept of amounts
-out of the Item constructors and I don't know what the best way would be to do
-that.
+                               For developers
+                               --------------
+Currently there is only one way to enter the information needed, which is
+by following the step by step input interface. Alternate input methods would be
+a useful improvement.
+The current version of the master branch can use both ores and minerals as a
+basis for calculations.
