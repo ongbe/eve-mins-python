@@ -16,6 +16,7 @@ locale.setlocale(locale.LC_ALL, ('sv_SE', 'UTF8'))
 # Constants
 #
 
+# TODO: Currently there are two sources for these names. Make it one.
 ORENAMES = ['veldspar', 'veldspar, concentrated', 'veldspar, dense', 'scordite',
             'scordite, condensed', 'scordite, massive', 'plagioclase',
             'plagioclase, azure', 'plagioclase, rich', 'pyroxeres',
@@ -25,7 +26,7 @@ ORENAMES = ['veldspar', 'veldspar, concentrated', 'veldspar, dense', 'scordite',
             'hemorphite, vivid', 'hemorphite, radiant', 'hedbergite',
             'hedbergite, vitric', 'hedbergite, glazed', 'gneiss',
             'gneiss, iridescent', 'gneiss, prismatic', 'ochre, dark',
-            'ochre, onyx', 'ochre, obsidian ', 'spodumain',
+            'ochre, onyx', 'ochre, obsidian', 'spodumain',
             'spodumain, bright', 'spodumain, gleaming', 'crokite',
             'crokite, sharp', 'crokite, crystalline', 'bistot',
             'bistot, triclinic', 'bistot, monoclinic', 'arkonor',
@@ -136,12 +137,11 @@ def main():
 	# Creates a list and appends the minerals (name, amount, price) onto it.
 	for currentMineral in MINERALNAMES:
 		minedMinerals.append(items.Mineral(currentMineral,
-			int(mineralAmounts[currentMineral]),
 			float(mineralPrices[currentMineral])))
 
 	print()
 	print("The total ISK value of the minerals would be: ",
-		locale.currency((calc.total_value(minedMinerals)),
+		locale.currency((calc.total_value(minedMinerals, mineralAmounts)),
 		False, True, False), " ISK")
 
 
