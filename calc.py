@@ -1,11 +1,17 @@
 # This module provides functions for the calculations.
 
+def round_to_minimum_batch(amount, minBatch):
+	roundedAmount = amount // minBatch * minBatch
+	return roundedAmount
+
+def amount_of_batches(amount, minBatch):
+	roundedAmount = round_to_minimum_batch(amount, minBatch)
+	amountOfBatches = roundedAmount // minBatch
+	return amountOfBatches
+
 # Convert a given amount of ores to minerals.
 # Returns a dictionary with Mineral objects.
-def round_to_minimum_batch(amount, minBatch):
-	refineAmount = amount // minBatch * minBatch
-	return refineAmount
-
+# TODO: Document the parameters.
 def ores_to_minerals(oreAmounts, oreData, mineralList):
 	outputMinerals = {}
 	for mineral in mineralList:
@@ -13,7 +19,9 @@ def ores_to_minerals(oreAmounts, oreData, mineralList):
 
 	for ore in oreData:
 		for mineral in mineralList:
-			outputMinerals[mineral] += (oreAmounts[ore.name] *
+			amountOfBatches = amount_of_batches(oreAmounts[ore.name],
+				int(ore.minBatch))
+			outputMinerals[mineral] += (amountOfBatches *
 				int(ore.refinedMinerals[mineral]))
 	return outputMinerals
 

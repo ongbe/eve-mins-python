@@ -2,6 +2,7 @@
 # Currently serves as the main frontend. Input is handled here and also all of
 # the output.
 # TODO: Make a menu where one can choose all options from a numbered list.
+# TODO: Give option to load predefined mineral amounts from file.
 
 from __future__ import division
 from __future__ import print_function
@@ -130,7 +131,6 @@ def main():
 		mineralAmounts = calc.ores_to_minerals(oreAmounts, oreData,
 			MINERALNAMES)
 	else:
-		# TODO: Give option to load predefined amounts from file.
 		mineralAmounts = manual_input("How much {0} was refined? ",
 			MINERALNAMES, prompt_float_input)
 
