@@ -45,7 +45,7 @@ MINERALNAMES = ['tritanium', 'pyerite', 'mexallon', 'isogen', 'nocxium',
 def parse_command_line_parameters():
 	""" Parses command line arguments """
 	usage = 'usage: %prog [options] output_filepath'
-	version = 'Version: %prog 0.1'
+	version = 'Version: %prog 0.2'
 	parser = OptionParser(usage=usage, version=version)
 
 	# Binary 'verbose' flag
@@ -127,12 +127,22 @@ def manual_input(question, iterationList, inputFunc):
 	return output
 
 def prepare_ore_list(oreList):
+"""Add potentially missing ore entries to the passed list.
+
+This is to prevent KeyError's, where keys are missing due to the input
+file (and subsequently the oreList) not having all possible ores.
+"""
 	for ore in ORENAMES:
 		if ore not in oreList:
 			oreList[ore] = 0
 	return oreList
 
 def prepare_mineral_list(mineralList):
+"""Add potentially missing mineral entries to the passed list.
+
+This is to prevent KeyError's, where keys are missing due to the input
+file (and subsequently the mineralList) not having all possible minerals.
+"""
 	for mineral in MINERALNAMES:
 		if mineral not in mineralList:
 			mineralList[mineral] = 0
@@ -177,6 +187,7 @@ def load_amounts(amountFile, ores, minerals):
 		else:
 			raise ValueError("Incorrectly formated input file.")
 
+	# Add potentially missing minerals/ores.
 	inputOres = prepare_ore_list(inputOres)
 	inputMinerals = prepare_mineral_list(inputMinerals)
 
