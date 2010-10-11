@@ -1,0 +1,3 @@
+arkonor=1000
+veldspar=200
+isogen=450
