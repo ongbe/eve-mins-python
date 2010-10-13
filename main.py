@@ -50,13 +50,13 @@ def parse_command_line_parameters():
 
 	# Binary 'verbose' flag
 	parser.add_option('-v', '--verbose', action='store_true',
-		dest='verbose', help='Print information during execution -- '+\
+		dest='verbose', help='print information during execution -- '+\
 		'useful for debugging [default: %default]')
 
 	# Pass a file name for non-interactive usage.
 	parser.add_option('-f', '--file_to_use', action='store',
-		type='string', dest='file_to_use', help='a filename with values '+\
-		'file [default: %default]')
+		type='string', dest='file_to_use', help='load an file with ore/mineral'+\
+		'amounts [default: %default]')
 
 	# Binary flag for whether prices should be loaded.
 	parser.add_option('-p', '--load_prices', action='store_true',
@@ -127,22 +127,22 @@ def manual_input(question, iterationList, inputFunc):
 	return output
 
 def prepare_ore_list(oreList):
-"""Add potentially missing ore entries to the passed list.
+	"""Add potentially missing ore entries to the passed list.
 
-This is to prevent KeyError's, where keys are missing due to the input
-file (and subsequently the oreList) not having all possible ores.
-"""
+	This is to prevent KeyError's, where keys are missing due to the input
+	file (and subsequently the oreList) not having all possible ores.
+	"""
 	for ore in ORENAMES:
 		if ore not in oreList:
 			oreList[ore] = 0
 	return oreList
 
 def prepare_mineral_list(mineralList):
-"""Add potentially missing mineral entries to the passed list.
+	"""Add potentially missing mineral entries to the passed list.
 
-This is to prevent KeyError's, where keys are missing due to the input
-file (and subsequently the mineralList) not having all possible minerals.
-"""
+	This is to prevent KeyError's, where keys are missing due to the input
+	file (and subsequently the mineralList) not having all possible minerals.
+	"""
 	for mineral in MINERALNAMES:
 		if mineral not in mineralList:
 			mineralList[mineral] = 0

@@ -14,8 +14,6 @@ My intention is to have this application answer this kind of questions.
 
                                For developers
                                --------------
-Currently there is only one way to enter the information needed, which is
-by following the step by step input interface. Alternate input methods would be
-a useful improvement.
-The current version of the master branch can use both ores and minerals as a
-basis for calculations.
+Currently the application accepts values both through interactive input
+and by parsing an input file.
+Next step is to implement a GUI, probably with wxwidgets.
